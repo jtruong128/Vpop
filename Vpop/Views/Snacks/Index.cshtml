@@ -1,0 +1,63 @@
+﻿@model Vpop.ViewModels.OrderSnacksViewModel;
+@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+
+<div class="container body-content">
+	<h3 >Snacks Order </h3>
+    <form method="post">
+            <div>
+                <input type="hidden" name="Custname" value=" " />
+           </div>
+            <p class="headerText">Pick a Snack below</p>
+           
+                @foreach (var snack in  Model.Snacks1Choices)
+                {
+                    <span style="padding-left:0.5em">
+                            <input type="radio" name="item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == "Vietnamese Egg Rolls ") />
+                            <label for="@snack.Key">@snack.Value</label>
+                    </span>
+                }
+          
+             <p>
+                @foreach (var snack in  Model.Snacks2Choices)
+                {
+                    <span style="padding-left:0.5em">
+                            <input type="radio" name="item" id="@snack.Key" value="@snack.Value" checked=@(snack.Key == "Vietnamese Egg Rolls ") />
+                            <label for="@snack.Key">@snack.Value</label>
+                    </span>
+                }
+            </p>
+            <p>
+                <input type="hidden" name="category" value="Snacks" />
+                 <input type="hidden" name="CurrDate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+            </p>
+            <p>
+                <input type="submit" value="Submit"/>
+          </p>
+       
+   </form>
+   <br/>
+   <hr/>
+   @if(ViewBag.order != null) {
+        <p>@ViewBag.message</p>
+        <table class="table">
+            <tr>
+                   <th>Order Number</th>
+                   <th>Customer Email</th>
+                   <th>Category</th>
+                   <th>Item</th>
+                   <th>Price</th>
+            </tr>
+            <tr>
+                   <td>@ViewBag.order.Id</td>
+                   <td>@ViewBag.order.Custname</td>
+                   <td>@ViewBag.order.Category</td>
+                   <td>@ViewBag.order.Item</td>
+                   <td>$@ViewBag.order.Price</td>
+            </tr>
+        </table>
+   }
+</div>

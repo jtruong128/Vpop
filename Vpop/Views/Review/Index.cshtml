@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div class="container body-content">
+   @if (ViewBag.orderCust.Count > 0) 
+   {
+            <form asp-controller="Review" asp-action="ButtonCheck" method="post">
+            <h3>Orders Summary</h3>
+            <br/>
+
+            
+                <table class="table">
+                    <tr>
+                        <th>Order Date: @ViewBag.date</th>
+                    </tr>
+                    <tr>
+                        <th>Customer Email: @ViewBag.custName</th>
+                    </tr>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th class="text-danger">Cancel Order</th>
+                        <th class="text-warning">Update Order</th>
+                    </tr>
+                    @foreach (var ord in ViewBag.orderCust)
+                    {
+                        <tr>
+                            <td>@ord.Id</td>
+                            <td>@ord.Category</td>
+                            <td>@ord.Item</td>
+                            <td>$@ord.Price</td>
+                            <td ><input type="checkbox" name="cancelIds" value="@ord.Id"/></td>
+                            <td ><input type="radio" name="editId" value="@ord.Id"/></td>
+                        </tr>
+                    }
+                </table>
+                <br/>
+               <button type="submit" name="cmd" value="Cancel" class="btn btn-danger btn-sm">Cancel Order</button>
+               <button type="submit" name="cmd" value="Update" class="btn btn-warning btn-sm">Update Order</button>
+               <button type="submit" name="cmd" value="Checkout" class="btn btn-success btn-sm">Check Out</button>
+                                    
+            
+        </form>
+    } 
+    else
+    {
+        <h3>There are no orders to review.</h3>
+    }
+</div>

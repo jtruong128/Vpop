@@ -1,0 +1,41 @@
+﻿@model Vpop.ViewModels.OrderBowlsViewModel;
+@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div class="container body-content">
+	<h3 >Bowl Order Form </h3>
+	<p>A Vietnamese street food staple. Served with choice of steamed rice, vermicelli noodles, or salad.<br /> Topped with choice of protein and garnished with fresh veggies. Noodles & salad bowls come with a Vietnamese Egg Roll.</p>
+    <form method ="post">
+           <div>
+                <input type="hidden" name="Custname" value=" " />
+           </div>
+             <p class="headerText">Pick a Bowl below</p>
+             <p>
+                 @foreach (var category in  Model.CategoryChoices)
+                 {
+                     <span class=".radioalign">
+                            <input type="radio" name="category" id="@category.Key" value="@category.Value" checked=@(category.Key == "Rice Bowl") />
+                            <label for="@category.Key">@category.Value</label>
+                    </span>
+                 }
+             </p>
+             <p class="headerText">Pick a protein below</p>
+             <p>       
+                  @foreach (var protein in Model.ProteinChoices)
+                  {
+                     <span class="radioalign">
+                             <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == "Veggie ") />
+                            <label for="@protein.Key">@protein.Value</label>
+                    </span>
+                 }
+              </p> 
+              <p>
+                     <input type="hidden" name="CurrDate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+              </p>
+              <p>
+                     <input type="submit" value="Submit"/>
+              </p>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+﻿@model Vpop.ViewModels.OrderBanhMiViewModel;
+@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div class="container body-content">
+	<h3 >BANH MI Order Form </h3>
+	<p>A Vietnamese baguette sandwich served with influences from the French an;d native
+	Vietnamese ingredients (pickled medley, cilantro, cucumber)</p>
+
+    <form method="post">
+           <div>
+                <input type="hidden" name="Custname" value=" " />
+           </div>
+           <p class="headerText">Pick a protein below</p> 
+           <p>
+                @foreach (var protein in Model.Protein1Choices)
+                {
+                   <span class=".radioalign">
+                       <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == "Veggie ") />
+                       <label for="@protein.Key">@protein.Value</label> 
+                   </span>
+                }
+               <br/>
+               @foreach (var protein in Model.Protein2Choices)
+               {
+                  <span class=".radioalign">
+                      <input type="radio" name="item" id="@protein.Key" value="@protein.Value" checked=@(protein.Key == "Veggie ") />
+                      <label for="@protein.Key">@protein.Value</label> 
+                  </span>
+               }
+          </p>
+            <p>
+                <input type="hidden" name="category" value="Banh Mi" />
+                <input type="hidden" name="CurrDate" value="@DateTime.Now.ToString("MM/dd/yyyy")">
+            </p>
+            <p>
+                <input type="submit" value="Submit"/>
+          </p>
+   </form>
+</div>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div> 
+    <br />
+     <h5>Your order has been submitted. Below is your order summary</h5>
+     <br />
+     <table class="table">
+          <tr>
+            
+          </tr>
+          <tr>
+                <th>Order Number</th>
+                <th>Customer Email</th>
+                <th>Category</th>
+                <th>Item</th>
+                <th>Price</th>
+                 <th>Order Date</th>
+          </tr>
+          <tr>
+                <td>@ViewBag.order.Id</td> 
+                <td>@ViewBag.order.Custname</td>
+                <td>@ViewBag.order.Category</td>
+                <td>@ViewBag.order.Item</td>
+                <td>$@ViewBag.order.Price</td>
+                <td>$@ViewBag.order.CurrDate</td>
+          </tr>
+     </table> 
+</div>

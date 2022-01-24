@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div class="container body-content">
+   @if (ViewBag.orderCust.Count > 0) 
+   {
+        <h3>Payment Summary</h3>
+         <br/>
+         <table class="table">
+               <tr>
+                       <th>Order Date: @ViewBag.date</th>
+               </tr>
+               <tr>
+                       <th>Customer Email: @ViewBag.custName</th>
+               </tr>
+               <tr>
+                        <th>Order Number</th>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Price</th>
+               </tr>
+               @foreach (var ord in ViewBag.orderCust)
+                {
+                    <tr>
+                            <td>@ord.Id</td>
+                            <td>@ord.Category</td>
+                            <td>@ord.Item</td>
+                            <td>$@ord.Price</td>
+                            
+                    </tr>
+                }
+                <tr>
+                    <td>Total Price: $@ViewBag.total</td>
+                </tr>
+                </table>
+    } 
+    else
+    {
+        <h3>There are no orders to review.</h3>
+    }
+</div>

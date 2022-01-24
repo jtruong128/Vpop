@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Vpop Page";
+    Layout = "_MainMenu";
+
+}
+<div class="container body-content">
+    <h6>Your order has been modified. Below is the revised order</h6><br>
+     @if(ViewBag.orderEdited != null)
+      {
+             <table class="table">
+                 <tr>
+                      <th>Order Number</th>
+                      <th>Customer Email</th>
+                      <th>Category</th>
+                      <th>Item</th>
+                      <th>Price</th>
+                      <th>Order Date</th>
+                 </tr>
+                 <tr>
+                     <td>@ViewBag.orderEdited.Id</td>
+                     <td>@ViewBag.orderEdited.Custname</td>
+                     <td>@ViewBag.orderEdited.Category</td>
+                     <td>@ViewBag.orderEdited.Item</td>
+                     <td>$@ViewBag.orderEdited.Price</td>
+                     <td>$@ViewBag.orderEdited.CurrDate</td>
+
+                </tr>
+           
+            </table>
+       }
+</div>
