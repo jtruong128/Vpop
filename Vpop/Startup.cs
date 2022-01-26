@@ -27,8 +27,6 @@ namespace Vpop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // services.AddDbContext<EventDbContext>(options =>
-            //    options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
 
             services.Configure<IdentityOptions>(options =>
