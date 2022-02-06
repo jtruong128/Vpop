@@ -10,16 +10,14 @@
          <br/>
          <table class="table">
                <tr>
-                       <th>Order Date: @ViewBag.date</th>
-               </tr>
-               <tr>
                        <th>Customer Email: @ViewBag.custName</th>
                </tr>
-               <tr>
+               <br /><tr>
                         <th>Order Number</th>
                         <th>Category</th>
                         <th>Item</th>
                         <th>Price</th>
+                        <th>Order Date</th>
                </tr>
                @foreach (var ord in ViewBag.orderCust)
                 {
@@ -28,6 +26,7 @@
                             <td>@ord.Category</td>
                             <td>@ord.Item</td>
                             <td>$@ord.Price</td>
+                            <td>@ord.CurrDate</td>
                             
                     </tr>
                 }

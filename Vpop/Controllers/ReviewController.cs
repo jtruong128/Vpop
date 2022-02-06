@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Vpop.Data;
@@ -17,16 +18,12 @@ namespace Vpop.Controllers
         public IActionResult Index()
         {
             string custname = HttpContext.Session.GetString("CustName");
+            string currDate = DateTime.Now.ToString("MM/dd/yyyy");
             List<Order> orders = context.Orders
-                .Where(p => p.Custname == custname)
+                .Where(p => p.Custname == custname && p.CurrDate == currDate) 
                 .ToList();
-            ViewBag.orderCust = orders;
-            if (orders.Count > 0)
-            {
-                ViewBag.custName = orders[0].Custname;
-                ViewBag.date = orders[0].CurrDate;
-                
-            }
+            ViewBag.orders = orders;
+            ViewBag.custName = custname;
             return View();
         }
 
@@ -76,11 +73,12 @@ namespace Vpop.Controllers
             else
             {
                 string custname = HttpContext.Session.GetString("CustName");
+                string currDate = DateTime.Now.ToString("MM/dd/yyyy");
                 List<Order> custOrderList = context.Orders
-                    .Where(p => p.Custname == custname)
+                    .Where(p => p.Custname == custname && p.CurrDate == currDate)
                     .ToList();
                 double total = context.Orders
-                                 .Where(p => p.Custname == custname)
+                                 .Where(p => p.Custname == custname && p.CurrDate == currDate)
                                  .Sum(p => p.Price);
 
                 ViewBag.orderCust = custOrderList;

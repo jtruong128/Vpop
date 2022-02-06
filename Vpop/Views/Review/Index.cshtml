@@ -4,7 +4,7 @@
 
 }
 <div class="container body-content">
-   @if (ViewBag.orderCust.Count > 0) 
+   @if (ViewBag.orders.Count > 0) 
    {
             <form asp-controller="Review" asp-action="ButtonCheck" method="post">
             <h3>Orders Summary</h3>
@@ -13,26 +13,25 @@
             
                 <table class="table">
                     <tr>
-                        <th>Order Date: @ViewBag.date</th>
+                        Customer Email: @ViewBag.custName
                     </tr>
-                    <tr>
-                        <th>Customer Email: @ViewBag.custName</th>
-                    </tr>
-                    <tr>
+                    <br /><tr>
                         <th>Order Number</th>
                         <th>Category</th>
                         <th>Item</th>
                         <th>Price</th>
+                        <th>Order Date</th>
                         <th class="text-danger">Cancel Order</th>
                         <th class="text-warning">Update Order</th>
                     </tr>
-                    @foreach (var ord in ViewBag.orderCust)
+                    @foreach (var ord in ViewBag.orders)
                     {
                         <tr>
                             <td>@ord.Id</td>
                             <td>@ord.Category</td>
                             <td>@ord.Item</td>
                             <td>$@ord.Price</td>
+                            <td>@ord.CurrDate</td>
                             <td ><input type="checkbox" name="cancelIds" value="@ord.Id"/></td>
                             <td ><input type="radio" name="editId" value="@ord.Id"/></td>
                         </tr>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using Vpop.Data;
 using Vpop.Models;
 using Vpop.ViewModels;
@@ -39,29 +40,55 @@ namespace Vpop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(OrderSnacksViewModel orderSnacksViewModel)
+        public IActionResult Index(OrderSnacksViewModel orderSnacksViewModel, string[] items)
         {
             orderSnacksViewModel.Custname = HttpContext.Session.GetString("CustName");
-            orderSnacksViewModel.Price = double.Parse(orderSnacksViewModel.Item.Split('$')[1]);
-            orderSnacksViewModel.Item = orderSnacksViewModel.Item.Split('$')[0];
             if (ModelState.IsValid)
             {
-                Order newOrder = new Order
+                foreach (string item in items)
                 {
-                    Custname = orderSnacksViewModel.Custname,
-                    Price = orderSnacksViewModel.Price,
-                    Item = orderSnacksViewModel.Item,
-                    Category = orderSnacksViewModel.Category,
-                    CurrDate = orderSnacksViewModel.CurrDate
-                };
-                context.Orders.Add(newOrder);
+                    orderSnacksViewModel.Price = double.Parse(item.Split('$')[1]);
+
+                    Order newOrder = new Order
+                    {
+                        Custname = orderSnacksViewModel.Custname,
+                        Item = item.Split('$')[0],
+                        Price = orderSnacksViewModel.Price,
+                        Category = orderSnacksViewModel.Category,
+                        CurrDate = orderSnacksViewModel.CurrDate
+                    };
+                    context.Orders.Add(newOrder);
+                }
                 context.SaveChanges();
-                return Redirect("/BanhMi/DisplayOrder");
+                HttpContext.Session.SetString("CurrDate", orderSnacksViewModel.CurrDate);
+                return RedirectToAction("DisplayOrder", new { newItems = items });
             }
             OrderSnacksViewModel viewModel = new OrderSnacksViewModel(Snacks1Choices, Snacks2Choices);
             return View(viewModel);
         }
+        public IActionResult DisplayOrder(string[] newItems)
+        {
+            List<Order> orders = new List<Order>();
+            string custname = HttpContext.Session.GetString("CustName");
+           string currdate = HttpContext.Session.GetString("CurrDate");
+            
+            
+            foreach (string item in newItems)
+            {
+                string myitem = item.Split('$')[0];
+                 Order order = context.Orders
+                .Where(p => p.Custname == custname)
+                .Where(p => p.Item == myitem)
+                .Where(p => p.CurrDate == currdate)
+                .ToList()
+                .OrderByDescending(p => p.Id).FirstOrDefault();
 
+                orders.Add(order);
+            }
+            
+            ViewBag.orders = orders;
+            return View();
+        }
     }
 
 }
