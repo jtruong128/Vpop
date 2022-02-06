@@ -351,3 +351,4 @@ C:\Users\jtruo\source\repos\capstone-project\Vpop\Vpop\obj\Debug\netcoreapp3.1\R
 C:\Users\jtruo\source\repos\capstone-project\Vpop\Vpop\obj\Debug\netcoreapp3.1\Razor\Views\Review\Checkout.cshtml.g.cs
 C:\Users\jtruo\source\repos\capstone-project\Vpop\Vpop\obj\Debug\netcoreapp3.1\Razor\Views\Review\Edit.cshtml.g.cs
 C:\Users\jtruo\source\repos\capstone-project\Vpop\Vpop\obj\Debug\netcoreapp3.1\Razor\Views\Review\Save.cshtml.g.cs
+C:\Users\jtruo\source\repos\capstone-project\Vpop\Vpop\obj\Debug\netcoreapp3.1\Razor\Views\Snacks\DisplayOrder.cshtml.g.cs
